@@ -1,38 +1,49 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    font-size: 16px;
+}
+
 .App {
-  text-align: center;
+    text-align: center;
 }
 
+/* The home container styles are handled inside home.css, no need to define it here */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+/* Logo image styles */
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 120px;
+    width: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Text and content styling (Avoid using h1 and tagline here, defined in home.css) */
+.text-content {
+    text-align: center;
+    color: #333;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Button Styles (Will be defined in home.css, so remove here) */
+.cta-buttons {
+    margin-top: 20px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* Global button styles removed since they're now in home.css */
