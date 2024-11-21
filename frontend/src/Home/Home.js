@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.png';
 import { Link } from 'react-router-dom';  // Corrected import for Link
-import './Home.css'; // Correct import for Home.css
+import './Home.css'; 
 
 function Home() {
     return (
