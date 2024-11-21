@@ -1,0 +1,38 @@
+﻿/* Apply navy blue background to the entire About Us page */
+.about-us-page {
+    height: 100vh; /* Full height of the viewport */
+    padding: 20px;
+    text-align: center;
+    background-color: #1e3a8a; /* Navy blue */
+    color: #fff; /* White text */
+    font-family: 'Gaegu', sans-serif; /* Custom font */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+}
+
+    .about-us-page h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    .about-us-page p {
+        font-size: 1.2rem;
+        color: #ffffff; /* White text for paragraphs */
+    }
+
+    .about-us-page .btn {
+        background-color: #1e3a8a; /* Navy blue for buttons */
+        color: white; /* White text for buttons */
+        padding: 14px 25px;
+        margin: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease;
+    }
+
+        .about-us-page .btn:hover {
+            background-color: #172c56; /* Darker navy blue on hover */
+        }

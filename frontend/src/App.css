@@ -7,13 +7,14 @@
 }
 
 body {
-    background-color: #f4f7f6;
+    background-color: #f4f7f6; /* Light gray background for other pages */
     font-size: 16px;
 }
 
 .App {
     text-align: center;
 }
+
 
 /* The home container styles are handled inside home.css, no need to define it here */
 .home-container {
@@ -45,5 +46,3 @@ body {
 .cta-buttons {
     margin-top: 20px;
 }
-
-/* Global button styles removed since they're now in home.css */
