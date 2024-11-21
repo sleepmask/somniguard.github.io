@@ -1,0 +1,83 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
+
+/* Apply consistent font globally */
+body, .login-container {
+  font-family: 'Gaegu', sans-serif;
+}
+
+/* Login page container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1e293b; /* Dark navy background like Home */
+  color: #ffffff;
+  padding: 20px;
+}
+
+/* Form wrapper to style login box */
+.form-wrapper {
+  background-color: #334155; /* Slightly lighter navy for contrast */
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Heading style */
+.login-heading {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+/* Form group (each input field) */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+/* Input fields */
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #64748b; /* Light grey border */
+  border-radius: 5px;
+  background-color: #f1f5f9;
+  font-size: 1rem;
+  color: #000000;
+}
+
+/* Button styling */
+.btn {
+  background-color: #1e3a8a; /* Same navy blue as Home page */
+  color: white;
+  padding: 14px 25px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #172c56; /* Darker navy on hover */
+}
+
+/* Error message styling */
+.error-message {
+  color: #ff6b6b; /* Light red for error text */
+  margin-top: 15px;
+  font-size: 1rem;
+}

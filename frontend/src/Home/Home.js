@@ -15,7 +15,7 @@ function Home() {
                 <div className="cta-buttons">
                     {/* Change "Learn React" to "About Us" and update the link */}
                     <Link to="/about-us" className="btn">About Us</Link>
-                    <Link to="/example" className="btn example-link">Login</Link>
+                    <Link to="/login" className="btn">Login</Link>
                 </div>
             </div>
         </div>
