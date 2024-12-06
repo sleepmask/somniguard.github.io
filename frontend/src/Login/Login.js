@@ -17,7 +17,7 @@ const Login = () => {
             localStorage.setItem('access_token', data.access);
             localStorage.setItem('refresh_token', data.refresh);
             alert(`Welcome ${username}`); // Optionally show a welcome message
-            window.location.href = '/dashboard'; // Redirect to the dashboard (or another page)
+            window.location.href = '/profile'; // Redirect to the profile page
         } catch (err) {
             // Display error message if login fails
             setError(err.message || 'Login failed');

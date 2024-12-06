@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif; /* Default font for most of the app */
 }
 
 body {
@@ -14,7 +14,6 @@ body {
 .App {
     text-align: center;
 }
-
 
 /* The home container styles are handled inside home.css, no need to define it here */
 .home-container {
