@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Profile.css';
 
 const Profile = ({ onLogout }) => {
+
     const [loading, setLoading] = useState(true);
     const [username, setUsername] = useState('');
 
@@ -9,6 +10,10 @@ const Profile = ({ onLogout }) => {
         const fetchProfile = async () => {
             try {
                 const token = localStorage.getItem('access_token');
+
+                // Log the retrieved token to confirm
+                console.log('Access Token Retrieved:', token);
+
                 if (!token) {
                     console.error('No token found');
                     setLoading(false);

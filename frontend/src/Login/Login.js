@@ -16,6 +16,11 @@ const Login = () => {
             // Store the access token in localStorage
             localStorage.setItem('access_token', data.access);
             localStorage.setItem('refresh_token', data.refresh);
+
+             // Log the stored tokens to confirm
+            console.log('Access Token Stored:', localStorage.getItem('access_token'));
+            console.log('Refresh Token Stored:', localStorage.getItem('refresh_token'));
+
             alert(`Welcome ${username}`); // Optionally show a welcome message
             window.location.href = '/profile'; // Redirect to the profile page
         } catch (err) {
