@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Home from './Home/Home';
 import AboutUs from './AboutUs/AboutUs';
 import Login from './Login/Login';
+import Signup from './Signup/Signup';
 import Profile from './Profile/Profile';
 import './App.css';
 
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/login" element={isAuthenticated ? <Navigate to="/profile" /> : <Login />} />
+                <Route path="/signup" element={isAuthenticated ? <Navigate to="/login" /> : <Signup />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile onLogout={handleLogout} /> : <Navigate to="/login" />} />
             </Routes>
         </Router>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; 
 import { login } from '../api';  // Import the login function from api.js
-import './Login.css';  // Assuming you have a separate CSS file for styles
+import './Login.css';  
 
 const Login = () => {
     const [username, setUsername] = useState(''); // State for username
@@ -53,7 +54,11 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <button type="submit" className="btn">Login</button>
+                    <div className="button-container">
+                        <button type="submit" className="btn">Login</button>
+                        <Link to="/signup" className="btn signup-btn">Create Account</Link>
+                    </div>
+                    
                 </form>
                 {error && <p className="error-message">{error}</p>} {/* Show error message */}
             </div>

@@ -52,7 +52,7 @@ body, .login-container {
 .form-group input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #64748b; /* Light grey border */
+  /* border: 1px solid #64748b;  */
   border-radius: 5px;
   background-color: #f1f5f9;
   font-size: 1rem;
@@ -60,6 +60,12 @@ body, .login-container {
 }
 
 /* Button styling */
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Space between buttons */
+  margin-top: 20px; /* Add some spacing above the buttons */
+}
+
 .btn {
   background-color: #1e3a8a; /* Same navy blue as Home page */
   color: white;

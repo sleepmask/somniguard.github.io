@@ -28,6 +28,28 @@ export const login = async (username, password) => {
     }
 };
 
+
+export const signup = async (userData) => {
+    try {
+        // Use the API instance for the POST request
+        const response = await API.post('register/', userData); // Adjust endpoint based on your backend
+        return response.data; // Return the response data
+    } catch (error) {
+        // Handle errors similarly to the login function
+        if (error.response) {
+            // Server responded with an error
+            throw new Error(error.response.data.detail || 'Signup failed');
+        } else if (error.request) {
+            // No response from the server (network issues)
+            throw new Error('Network error. Please try again.');
+        } else {
+            // Any other errors
+            throw new Error(error.message || 'An unexpected error occurred.');
+        }
+    }
+};
+
+
 // Function to fetch protected data using the access token
 export const fetchProtectedData = async () => {
     try {
