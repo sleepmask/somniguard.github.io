@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
-import { signup } from '../api'; 
+import { signup } from '../api';
 import './Signup.css';
 
 const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [firstName, setFirstName] = useState(''); // New state for first name
-    const [lastName, setLastName] = useState(''); // New state for last name
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [validationErrors, setValidationErrors] = useState({});
 
     const handleSignup = async (e) => {
-        e.preventDefault(); // Prevent form submission from refreshing the page
+        e.preventDefault();
         setError('');
         setSuccess('');
+        setValidationErrors({});  // Reset validation errors
 
         try {
             await signup({
                 username,
                 password,
                 email,
-                first_name: firstName, // Include first name
-                last_name: lastName, // Include last name
-            }); 
+                first_name: firstName,
+                last_name: lastName,
+            });
             setSuccess('Account created successfully! You can now log in.');
             setUsername('');
             setPassword('');
@@ -31,8 +33,10 @@ const Signup = () => {
             setFirstName('');
             setLastName('');
         } catch (err) {
-            setError(err.message || 'Signup failed. Please try again.');
-            console.error('Error signing up:', err);
+            // Parse and set validation errors
+            const errorData = JSON.parse(err.message);
+            setValidationErrors(errorData);
+            console.error('Error signing up:', errorData);
         }
     };
 
@@ -49,7 +53,12 @@ const Signup = () => {
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                         />
+                        {/* Display errors for first name */}
+                        {validationErrors.first_name && validationErrors.first_name.map((error, idx) => (
+                            <p key={idx} className="error-message">{error}</p>
+                        ))}
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="lastName">Last Name:</label>
                         <input
@@ -58,7 +67,12 @@ const Signup = () => {
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                         />
+                        {/* Display errors for last name */}
+                        {validationErrors.last_name && validationErrors.last_name.map((error, idx) => (
+                            <p key={idx} className="error-message">{error}</p>
+                        ))}
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="username">Username:</label>
                         <input
@@ -67,7 +81,12 @@ const Signup = () => {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
+                        {/* Display errors for username */}
+                        {validationErrors.username && validationErrors.username.map((error, idx) => (
+                            <p key={idx} className="error-message">{error}</p>
+                        ))}
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="email">Email:</label>
                         <input
@@ -76,7 +95,12 @@ const Signup = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
+                        {/* Display errors for email */}
+                        {validationErrors.email && validationErrors.email.map((error, idx) => (
+                            <p key={idx} className="error-message">{error}</p>
+                        ))}
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="password">Password:</label>
                         <input
@@ -85,9 +109,15 @@ const Signup = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                        {/* Display errors for password */}
+                        {validationErrors.password && validationErrors.password.map((error, idx) => (
+                            <p key={idx} className="error-message">{error}</p>
+                        ))}
                     </div>
+
                     <button type="submit" className="btn">Sign Up</button>
                 </form>
+
                 {error && <p className="error-message">{error}</p>}
                 {success && <p className="success-message">{success}</p>}
             </div>

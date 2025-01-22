@@ -31,16 +31,16 @@ export const login = async (username, password) => {
 
 export const signup = async (userData) => {
     try {
-        // Use the API instance for the POST request
-        const response = await API.post('register/', userData); // Adjust endpoint based on your backend
-        return response.data; // Return the response data
+        // Send POST request for signup
+        const response = await API.post('register/', userData);
+        return response.data; // Return the response data if successful
     } catch (error) {
-        // Handle errors similarly to the login function
-        if (error.response) {
-            // Server responded with an error
-            throw new Error(error.response.data.detail || 'Signup failed');
+        // Handle errors from backend (validation errors)
+        if (error.response && error.response.data) {
+            // If the error response contains validation errors, return them
+            throw new Error(JSON.stringify(error.response.data));  // Use JSON.stringify to pass all errors to frontend
         } else if (error.request) {
-            // No response from the server (network issues)
+            // If no response, handle network errors
             throw new Error('Network error. Please try again.');
         } else {
             // Any other errors
@@ -48,6 +48,7 @@ export const signup = async (userData) => {
         }
     }
 };
+
 
 
 // Function to fetch protected data using the access token
