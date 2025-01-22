@@ -58,8 +58,10 @@ const Profile = ({ onLogout }) => {
                     <h1 className="error-text">Error Loading Profile</h1>
                 ) : (
                     <div>
-                        <h1 className="welcome-text">Welcome, {userData.username} {userData.last_name}!</h1>
-                        <p className="profile-info">ID: {userData.id}</p>
+                            <h1 className="welcome-text">Welcome, {userData.first_name} {userData.last_name}!</h1>
+                            <p className="profile-info">Username: {userData.username}</p>
+
+                        <p className="profile-info">User ID: {userData.id}</p>
                         <p className="profile-info">Email: {userData.email}</p>
                     </div>
                 )}

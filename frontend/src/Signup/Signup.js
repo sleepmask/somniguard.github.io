@@ -6,6 +6,8 @@ const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState(''); // New state for first name
+    const [lastName, setLastName] = useState(''); // New state for last name
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -15,11 +17,19 @@ const Signup = () => {
         setSuccess('');
 
         try {
-            await signup({ username, password, email }); // Call the signup API function
+            await signup({
+                username,
+                password,
+                email,
+                first_name: firstName, // Include first name
+                last_name: lastName, // Include last name
+            }); 
             setSuccess('Account created successfully! You can now log in.');
             setUsername('');
             setPassword('');
             setEmail('');
+            setFirstName('');
+            setLastName('');
         } catch (err) {
             setError(err.message || 'Signup failed. Please try again.');
             console.error('Error signing up:', err);
@@ -31,6 +41,24 @@ const Signup = () => {
             <div className="form-wrapper">
                 <h1 className="signup-heading">Sign Up</h1>
                 <form onSubmit={handleSignup} className="signup-form">
+                    <div className="form-group">
+                        <label htmlFor="firstName">First Name:</label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="lastName">Last Name:</label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                        />
+                    </div>
                     <div className="form-group">
                         <label htmlFor="username">Username:</label>
                         <input
