@@ -1,25 +1,36 @@
-﻿/* Apply navy blue background to the entire About Us page */
+﻿body, .about-us-page {
+    font-family: 'Gaegu', sans-serif; 
+}
+
 .about-us-page {
-    height: 100vh; /* Full height of the viewport */
-    padding: 20px;
-    text-align: center;
-    background-color: #1e3a8a; /* Navy blue */
-    color: #fff; /* White text */
-    font-family: 'Gaegu', sans-serif; /* Custom font */
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    /* Gradient with blue in the middle and white on the outside */
+    background: radial-gradient(circle, rgba(0, 31, 61, 1) 0%, rgba(0, 31, 61, 0.8) 70%, rgba(0, 31, 61, 0.6) 100%);
+    box-shadow: none;
+    background-color: transparent;
 }
 
     .about-us-page h1 {
-        font-size: 3rem;
+        font-size: 4rem; 
+        font-weight: bold;
         margin-bottom: 20px;
+        color: #ffffff;
     }
 
     .about-us-page p {
-        font-size: 1.2rem;
-        color: #ffffff; /* White text for paragraphs */
+        font-size: 1.5rem; 
+        color: #d3d3d3; 
+        margin-bottom: 30px;
+        line-height: 1.6; 
+        max-width: 800px;
+        font-family: 'Gaegu', sans-serif;
     }
 
     .about-us-page .btn {
@@ -29,10 +40,28 @@
         margin: 10px;
         border-radius: 5px;
         text-decoration: none;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         transition: background-color 0.3s ease;
+        font-family: 'Gaegu', sans-serif;
     }
 
         .about-us-page .btn:hover {
             background-color: #172c56; /* Darker navy blue on hover */
+            transform: scale(1.05);
         }
+
+@media (max-width: 768px) {
+    .about-us-page h1 {
+        font-size: 3rem; /* Adjust title size for smaller screens */
+    }
+
+    .about-us-page p {
+        font-size: 1.2rem; /* Adjust paragraph font size */
+        padding: 0 15px; /* Add padding for smaller screens */
+    }
+
+    .about-us-page .btn {
+        padding: 12px 20px; /* Adjust button padding */
+        font-size: 1rem; /* Adjust font size for buttons */
+    }
+}

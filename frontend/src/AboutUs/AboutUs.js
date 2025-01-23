@@ -2,15 +2,6 @@ import React, { useEffect } from 'react';
 import './AboutUs.css'; // Add custom styles for the About Us page
 
 function AboutUs() {
-    useEffect(() => {
-        // Add a class to the body when this page is loaded
-        document.body.classList.add('about-us-page');
-
-        // Remove the class when the component is unmounted
-        return () => {
-            document.body.classList.remove('about-us-page');
-        };
-    }, []);
 
     return (
         <div className="about-us-page">
