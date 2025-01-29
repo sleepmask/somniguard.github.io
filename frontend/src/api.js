@@ -28,26 +28,21 @@ export const login = async (username, password) => {
     }
 };
 
-
 export const signup = async (userData) => {
     try {
-        // Send POST request for signup
         const response = await API.post('register/', userData);
-        return response.data; // Return the response data if successful
+        return response.data;
     } catch (error) {
-        // Handle errors from backend (validation errors)
         if (error.response && error.response.data) {
-            // If the error response contains validation errors, return them
-            throw new Error(JSON.stringify(error.response.data));  // Use JSON.stringify to pass all errors to frontend
+            throw new Error(JSON.stringify(error.response.data));
         } else if (error.request) {
-            // If no response, handle network errors
             throw new Error('Network error. Please try again.');
         } else {
-            // Any other errors
             throw new Error(error.message || 'An unexpected error occurred.');
         }
     }
 };
+
 
 
 

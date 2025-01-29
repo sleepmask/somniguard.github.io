@@ -9,6 +9,7 @@ const Signup = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [dob, setDob] = useState(''); // New state for Date of Birth
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [validationErrors, setValidationErrors] = useState({});
@@ -26,15 +27,18 @@ const Signup = () => {
                 last_name: lastName,
                 username,
                 email,
-                password
+                password,
+                dob, // Include DOB in the request
             });
             setSuccess('Account created successfully! Redirecting to login...');
+
             // Clear form fields
-            setUsername('');
-            setPassword('');
-            setEmail('');
             setFirstName('');
             setLastName('');
+            setUsername('');
+            setEmail('');
+            setPassword('');
+            setDob('');
 
             // Navigate to the login page after a short delay
             setTimeout(() => {
@@ -114,6 +118,19 @@ const Signup = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         {validationErrors.password && validationErrors.password.map((error, idx) => (
+                            <p key={idx} className="error-message">{error}</p>
+                        ))}
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="dob">Date of Birth:</label>
+                        <input
+                            type="date"
+                            id="dob"
+                            value={dob}
+                            onChange={(e) => setDob(e.target.value)}
+                        />
+                        {validationErrors.dob && validationErrors.dob.map((error, idx) => (
                             <p key={idx} className="error-message">{error}</p>
                         ))}
                     </div>
