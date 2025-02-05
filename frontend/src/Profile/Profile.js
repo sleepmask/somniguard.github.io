@@ -1,4 +1,5 @@
-﻿import React, { useState, useEffect } from 'react'; // Correctly import React and hooks
+﻿
+import React, { useState, useEffect } from 'react';
 import './Profile.css';
 
 const Profile = ({ onLogout }) => {
@@ -28,6 +29,7 @@ const Profile = ({ onLogout }) => {
 
                 if (response.ok) {
                     const data = await response.json();
+                    console.log("Fetched Profile Data:", data);  // Debugging line
                     setUserData(data);
                 } else {
                     setError(true);
@@ -43,10 +45,24 @@ const Profile = ({ onLogout }) => {
         fetchProfile();
     }, []);
 
+
     const handleLogout = () => {
         localStorage.removeItem('access_token');
         onLogout();
         window.location.href = '/login';
+    };
+
+    // Function to calculate age
+    const calculateAge = (dob) => {
+        if (!dob) return 'N/A';
+        const birthDate = new Date(dob);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
     };
 
     if (loading) return <div className="profile-container"><p>Loading...</p></div>;
@@ -58,11 +74,12 @@ const Profile = ({ onLogout }) => {
                     <h1 className="error-text">Error Loading Profile</h1>
                 ) : (
                     <div>
-                            <h1 className="welcome-text">Welcome, {userData.first_name} {userData.last_name}!</h1>
-                            <p className="profile-info">Username: {userData.username}</p>
-
+                        <h1 className="welcome-text">Welcome, {userData.first_name} {userData.last_name}!</h1>
+                        <p className="profile-info">Username: {userData.username}</p>
                         <p className="profile-info">User ID: {userData.id}</p>
                         <p className="profile-info">Email: {userData.email}</p>
+                        <p className="profile-info">Date of Birth: {userData.date_of_birth}</p>
+                        <p className="profile-info">Age: {calculateAge(userData.date_of_birth)}</p>
                     </div>
                 )}
                 <button className="logout-button" onClick={handleLogout}>Logout</button>
@@ -94,4 +111,4 @@ const Profile = ({ onLogout }) => {
     );
 };
 
-export default Profile; // Ensure you are exporting the Profile component
+export default Profile;

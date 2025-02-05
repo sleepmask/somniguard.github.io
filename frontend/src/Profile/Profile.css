@@ -1,4 +1,5 @@
-﻿/* Apply the Gaegu font globally to Profile */
+﻿
+/* Apply the Gaegu font globally to Profile */
 @import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
 
 body {
@@ -47,9 +48,9 @@ body {
     transition: all 0.3s ease;
 }
 
-.logout-button:hover {
-    background-color: #172c56; /* Darker navy blue on hover */
-}
+    .logout-button:hover {
+        background-color: #172c56; /* Darker navy blue on hover */
+    }
 
 /* Metrics Section */
 .metrics-section {
@@ -57,11 +58,11 @@ body {
     text-align: center;
 }
 
-.metrics-section h2 {
-    font-size: 2.5rem;
-    color: #ffffff;
-    margin-bottom: 30px;
-}
+    .metrics-section h2 {
+        font-size: 2.5rem;
+        color: #ffffff;
+        margin-bottom: 30px;
+    }
 
 .metrics-grid {
     display: grid;
@@ -79,22 +80,22 @@ body {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.metric-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
+    .metric-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
 
-.metric-card h3 {
-    font-size: 1.8rem;
-    color: #ffffff;
-    margin-bottom: 15px;
-}
+    .metric-card h3 {
+        font-size: 1.8rem;
+        color: #ffffff;
+        margin-bottom: 15px;
+    }
 
-.metric-card p {
-    font-size: 1.1rem;
-    color: #d3d3d3;
-    line-height: 1.8;
-}
+    .metric-card p {
+        font-size: 1.1rem;
+        color: #d3d3d3;
+        line-height: 1.8;
+    }
 
 /* Footer Section */
 .profile-footer {
