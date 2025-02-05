@@ -1,11 +1,11 @@
-﻿
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import './Profile.css';
 
 const Profile = ({ onLogout }) => {
     const [loading, setLoading] = useState(true);
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(false);
+    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -29,7 +29,7 @@ const Profile = ({ onLogout }) => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log("Fetched Profile Data:", data);  // Debugging line
+                    console.log("Fetched Profile Data:", data);
                     setUserData(data);
                 } else {
                     setError(true);
@@ -43,8 +43,14 @@ const Profile = ({ onLogout }) => {
         };
 
         fetchProfile();
-    }, []);
 
+        // Update time every second
+        const interval = setInterval(() => {
+            setCurrentTime(new Date().toLocaleTimeString());
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('access_token');
@@ -52,7 +58,6 @@ const Profile = ({ onLogout }) => {
         window.location.href = '/login';
     };
 
-    // Function to calculate age
     const calculateAge = (dob) => {
         if (!dob) return 'N/A';
         const birthDate = new Date(dob);
@@ -65,25 +70,51 @@ const Profile = ({ onLogout }) => {
         return age;
     };
 
+    const today = new Date().toLocaleDateString();
+
     if (loading) return <div className="profile-container"><p>Loading...</p></div>;
 
     return (
         <div className="profile-page">
             <header className="profile-header">
-                {error ? (
-                    <h1 className="error-text">Error Loading Profile</h1>
-                ) : (
-                    <div>
-                        <h1 className="welcome-text">Welcome, {userData.first_name} {userData.last_name}!</h1>
-                        <p className="profile-info">Username: {userData.username}</p>
-                        <p className="profile-info">User ID: {userData.id}</p>
-                        <p className="profile-info">Email: {userData.email}</p>
-                        <p className="profile-info">Date of Birth: {userData.date_of_birth}</p>
-                        <p className="profile-info">Age: {calculateAge(userData.date_of_birth)}</p>
-                    </div>
-                )}
+                <div className="header-left">
+                    <h1 className="welcome-text">Welcome, {userData.first_name}!</h1>
+                    <p className="date-time">{today} | {currentTime}</p>
+                </div>
                 <button className="logout-button" onClick={handleLogout}>Logout</button>
             </header>
+
+            <hr className="separator" />
+
+            {!error && (
+                <div className="user-info-container">
+                    <h2 className="user-info-title">User Information</h2>
+                    
+                    <div className="user-profile">
+                        {/* Profile Picture Placeholder */}
+                        <div className="profile-picture-placeholder"></div>
+
+                        {/* Username & Email */}
+                        <div className="profile-text">
+                            <h3>Username</h3>
+                            <p>{userData.username}</p>
+                            <h3>Email</h3>
+                            <p>{userData.email}</p>
+                        </div>
+                    </div>
+
+                    <div className="user-info-grid">
+                        <div className="info-card"><h3>First Name</h3><p>{userData.first_name}</p></div>
+                        <div className="info-card"><h3>Last Name</h3><p>{userData.last_name}</p></div>
+                        <div className="info-card"><h3>Email</h3><p>{userData.email}</p></div>
+                        <div className="info-card"><h3>Date of Birth</h3><p>{userData.date_of_birth}</p></div>
+                        <div className="info-card"><h3>Age</h3><p>{calculateAge(userData.date_of_birth)}</p></div>
+                        <div className="info-card"><h3>Join Date</h3><p>{}</p></div>
+
+
+                    </div>
+                </div>
+            )}
 
             {!error && (
                 <main className="metrics-section">
@@ -104,6 +135,7 @@ const Profile = ({ onLogout }) => {
                     </div>
                 </main>
             )}
+
             <footer className="profile-footer">
                 <p>Enhancing sleep one night at a time with cutting-edge technology.</p>
             </footer>

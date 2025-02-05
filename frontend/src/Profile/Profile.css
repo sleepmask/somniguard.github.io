@@ -1,67 +1,103 @@
-﻿
-/* Apply the Gaegu font globally to Profile */
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
 
 body {
     font-family: 'Gaegu', sans-serif;
     margin: 0;
     padding: 0;
     background: radial-gradient(circle, rgba(0, 31, 61, 1) 0%, rgba(0, 31, 61, 0.8) 70%, rgba(0, 31, 61, 0.6) 100%);
-    color: white; /* Default text color */
+    color: white;
 }
 
-/* Profile Page Container */
-.profile-page {
+.profile-header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     padding: 20px;
-    min-height: 100vh;
 }
 
-/* Header Section */
-.profile-header {
-    text-align: center;
-    margin-bottom: 40px;
+.header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.welcome-text {
-    font-size: 3rem;
-    color: #ffffff; /* Bright white for visibility */
-    margin: 10px 0;
-}
-
-.error-text {
-    font-size: 3rem;
-    color: #ff6666;
+.welcome-text, .date-time {
+    font-size: 2.5rem; /* Increased size of the welcome text */
+    color: white;
+    margin: 0;
+    font-family: 'Gaegu', sans-serif;
 }
 
 .logout-button {
-    padding: 12px 24px;
-    background-color: #1e3a8a; /* Navy blue matching the Home page */
-    color: #ffffff;
+    padding: 10px 20px;
+    background-color: #1e3a8a;
+    color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1.2rem;
     cursor: pointer;
-    margin-top: 20px;
-    transition: all 0.3s ease;
+    font-family: 'Gaegu', sans-serif !important; /* Ensure logout button is Gaegu */
 }
 
-    .logout-button:hover {
-        background-color: #172c56; /* Darker navy blue on hover */
-    }
+.user-info-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.user-info-title {
+    font-size: 2.5rem; /* Match size of Sleep Metrics Overview */
+    margin-bottom: 15px;
+    font-family: 'Gaegu', sans-serif !important; /* Force Gaegu font */
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px; /* Added space between user profile and sleep metrics title */
+}
+
+.profile-picture-placeholder {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.profile-text h3 {
+    margin: 5px 0;
+    font-family: 'Gaegu', sans-serif !important; /* Force Gaegu font */
+}
+
+.user-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    text-align: center;
+    font-family: 'Gaegu', sans-serif !important; /* Force Gaegu font */
+}
 
 /* Metrics Section */
 .metrics-section {
     max-width: 900px;
     text-align: center;
+    margin-top: 30px; /* Added space between user profile and sleep metrics */
+    margin-left: auto; /* Center the metrics section */
+    margin-right: auto; /* Center the metrics section */
 }
 
     .metrics-section h2 {
         font-size: 2.5rem;
         color: #ffffff;
         margin-bottom: 30px;
+        font-family: 'Gaegu', sans-serif !important; /* Force Gaegu font */
+        text-align: center; /* Centered the title */
     }
 
 .metrics-grid {
@@ -89,12 +125,14 @@ body {
         font-size: 1.8rem;
         color: #ffffff;
         margin-bottom: 15px;
+        font-family: 'Gaegu', sans-serif !important; /* Force Gaegu font */
     }
 
     .metric-card p {
         font-size: 1.1rem;
         color: #d3d3d3;
         line-height: 1.8;
+        font-family: 'Gaegu', sans-serif !important; /* Force Gaegu font */
     }
 
 /* Footer Section */
@@ -103,6 +141,7 @@ body {
     font-size: 1rem;
     color: #d3d3d3;
     text-align: center;
+    font-family: 'Gaegu', sans-serif !important; /* Force Gaegu font */
 }
 
 /* Mobile Responsiveness */
@@ -118,4 +157,31 @@ body {
     .metric-card p {
         font-size: 1rem;
     }
+}
+
+/* Force Gaegu font on all text inside the user info sections */
+.user-info-title,
+.user-profile h3,
+.user-info-grid p,
+.user-info-grid h3,
+.user-info-grid span {
+    font-family: 'Gaegu', sans-serif !important; /* Force Gaegu font */
+}
+
+/* Additional styling for specific text elements within the user info boxes */
+.user-info-grid .info-card p,
+.user-info-grid .info-card h3 {
+    font-family: 'Gaegu', sans-serif !important; /* Force Gaegu font */
+}
+
+/* Labels and input fields inside the user info section */
+.user-info-grid label,
+.user-info-grid .info-card input {
+    font-family: 'Gaegu', sans-serif !important; /* Ensure label and input fields are Gaegu */
+}
+
+/* Profile header user info labels */
+.profile-header .header-left .welcome-text,
+.profile-header .header-left .date-time {
+    font-family: 'Gaegu', sans-serif !important;
 }
