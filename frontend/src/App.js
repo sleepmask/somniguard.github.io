@@ -6,6 +6,9 @@ import Login from './Login/Login';
 import Signup from './Signup/Signup';
 import Profile from './Profile/Profile';
 import './App.css';
+import HeartRate from './Biometrics/HeartRate';
+import Movement from './Biometrics/Movement';
+import OxygenSaturation from './Biometrics/OxygenSaturation';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -29,6 +32,9 @@ function App() {
                 <Route path="/login" element={isAuthenticated ? <Navigate to="/profile" /> : <Login />} />
                 <Route path="/signup" element={isAuthenticated ? <Navigate to="/login" /> : <Signup />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile onLogout={handleLogout} /> : <Navigate to="/login" />} />
+                <Route path="/heart-rate" element={<HeartRate />} />
+                <Route path="/movement" element={<Movement />} />
+                {/* <Route path="/oxygen" element={<OxygenSaturation />} /> */}
             </Routes>
         </Router>
     );

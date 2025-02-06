@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // For navigation links
 import './Profile.css';
+import { Link } from 'react-router-dom';
 
 const Profile = ({ onLogout }) => {
     const [loading, setLoading] = useState(true);
@@ -12,6 +13,7 @@ const Profile = ({ onLogout }) => {
         const fetchProfile = async () => {
             try {
                 const token = localStorage.getItem('access_token');
+                console.log("Token:", token);
 
                 if (!token) {
                     console.error('No token found');
@@ -55,6 +57,9 @@ const Profile = ({ onLogout }) => {
 
     const handleLogout = () => {
         localStorage.removeItem('access_token');
+        setUserData(null);  
+        setError(false);    
+        setLoading(false);
         onLogout();
         window.location.href = '/login';
     };
@@ -62,6 +67,10 @@ const Profile = ({ onLogout }) => {
     const today = new Date().toLocaleDateString();
 
     if (loading) return <div className="profile-container"><p>Loading...</p></div>;
+
+    if (!userData) {
+        return <div className="profile-container"><p>Error loading user data. Please try again later.</p></div>;
+    }
 
     return (
         <div className="profile-page">
@@ -117,16 +126,23 @@ const Profile = ({ onLogout }) => {
                     <h2>Sleep Metrics Overview</h2>
                     <div className="metrics-grid">
                         <div className="metric-card">
-                            <h3>Heart Rate</h3>
-                            <p>Monitor your resting heart rate and heart rate variability for better insight into your health and sleep quality.</p>
+                            <Link to="/heart-rate" style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <h3>Heart Rate</h3>
+                                <p>Monitor your resting heart rate and heart rate variability for better insight into your health and sleep quality.</p>
+                            </Link>
+                            {/* <Link to="/heart-rate" className="text-blue-500">View Heart Rate Data</Link> */}
                         </div>
                         <div className="metric-card">
-                            <h3>Movement</h3>
-                            <p>Track your movement during sleep to understand restlessness and identify patterns that affect your sleep cycles.</p>
+                            <Link to="/heart-rate" style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <h3>Movement</h3>
+                                <p>Track your movement during sleep to understand restlessness and identify patterns that affect your sleep cycles.</p>
+                            </Link>
                         </div>
                         <div className="metric-card">
-                            <h3>SpO<sub>2</sub> Levels</h3>
-                            <p>Measure the oxygen saturation in your blood to ensure you're getting enough oxygen during sleep.</p>
+                            <Link to="/heart-rate" style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <h3>SpO<sub>2</sub> Levels</h3>
+                                <p>Measure the oxygen saturation in your blood to ensure you're getting enough oxygen during sleep.</p>
+                            </Link>
                         </div>
                     </div>
                 </main>
