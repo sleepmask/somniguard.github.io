@@ -1,7 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // For navigation links
 import './Profile.css';
-import { Link } from 'react-router-dom';
 
 const Profile = ({ onLogout }) => {
     const [loading, setLoading] = useState(true);
