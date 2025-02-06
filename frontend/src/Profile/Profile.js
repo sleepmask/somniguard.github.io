@@ -1,4 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // For navigation links
 import './Profile.css';
 
 const Profile = ({ onLogout }) => {
@@ -58,30 +59,30 @@ const Profile = ({ onLogout }) => {
         window.location.href = '/login';
     };
 
-    const calculateAge = (dob) => {
-        if (!dob) return 'N/A';
-        const birthDate = new Date(dob);
-        const today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        return age;
-    };
-
     const today = new Date().toLocaleDateString();
 
     if (loading) return <div className="profile-container"><p>Loading...</p></div>;
 
     return (
         <div className="profile-page">
+            {/* Profile Header */}
             <header className="profile-header">
-                <div className="header-left">
-                    <h1 className="welcome-text">Welcome, {userData.first_name}!</h1>
-                    <p className="date-time">{today} | {currentTime}</p>
+                <div className="header-content">
+                    <div className="header-left">
+                        <div className="welcome-container">
+                            <h1 className="welcome-text">Welcome, {userData.first_name}!</h1>
+                            <p className="date-time">{today} | {currentTime}</p>
+                        </div>
+                    </div>
+                    <nav className="nav2bar">
+                        <div className="nav2bar-buttons">
+                            <button className="nav2-button">Heart Rate</button>
+                            <button className="nav2-button">Movement</button>
+                            <button className="nav2-button">SpO2</button>
+                            <button className="logout-button" onClick={handleLogout}>Logout</button>
+                        </div>
+                    </nav>
                 </div>
-                <button className="logout-button" onClick={handleLogout}>Logout</button>
             </header>
 
             <hr className="separator" />
@@ -89,12 +90,9 @@ const Profile = ({ onLogout }) => {
             {!error && (
                 <div className="user-info-container">
                     <h2 className="user-info-title">User Information</h2>
-                    
-                    <div className="user-profile">
-                        {/* Profile Picture Placeholder */}
-                        <div className="profile-picture-placeholder"></div>
 
-                        {/* Username & Email */}
+                    <div className="user-profile">
+                        <div className="profile-picture-placeholder"></div>
                         <div className="profile-text">
                             <h3>Username</h3>
                             <p>{userData.username}</p>
@@ -108,10 +106,8 @@ const Profile = ({ onLogout }) => {
                         <div className="info-card"><h3>Last Name</h3><p>{userData.last_name}</p></div>
                         <div className="info-card"><h3>Email</h3><p>{userData.email}</p></div>
                         <div className="info-card"><h3>Date of Birth</h3><p>{userData.date_of_birth}</p></div>
-                        <div className="info-card"><h3>Age</h3><p>{calculateAge(userData.date_of_birth)}</p></div>
-                        <div className="info-card"><h3>Join Date</h3><p>{}</p></div>
-
-
+                        <div className="info-card"><h3>Age</h3><p>{new Date().getFullYear() - new Date(userData.date_of_birth).getFullYear()}</p></div>
+                        <div className="info-card"><h3>Join Date</h3><p>{userData.date_joined}</p></div>
                     </div>
                 </div>
             )}

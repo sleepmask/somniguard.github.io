@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import { login } from '../api';  // Import the login function from api.js
-import './Login.css';  
+import './Login.css';
 
 const Login = () => {
     const [username, setUsername] = useState(''); // State for username
@@ -18,7 +18,7 @@ const Login = () => {
             localStorage.setItem('access_token', data.access);
             localStorage.setItem('refresh_token', data.refresh);
 
-             // Log the stored tokens to confirm
+            // Log the stored tokens to confirm
             console.log('Access Token Stored:', localStorage.getItem('access_token'));
             console.log('Refresh Token Stored:', localStorage.getItem('refresh_token'));
 
@@ -33,6 +33,14 @@ const Login = () => {
 
     return (
         <div className="login-container">
+            {/* Navigation bar at the top */}
+            <nav className="navbar">
+                <div className="navbar-links">
+                    <Link to="/" className="btn">Home</Link>
+                    <Link to="/about-us" className="btn">About Us</Link>
+                </div>
+            </nav>
+
             <div className="form-wrapper">
                 <h1 className="login-heading">Login</h1>
                 <form onSubmit={handleLogin} className="login-form">
@@ -58,7 +66,6 @@ const Login = () => {
                         <button type="submit" className="btn">Login</button>
                         <Link to="/signup" className="btn">Create Account</Link>
                     </div>
-                    
                 </form>
                 {error && <p className="error-message">{error}</p>} {/* Show error message */}
             </div>

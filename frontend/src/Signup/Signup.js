@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { signup } from '../api';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate, Link } from 'react-router-dom'; // Import Link for navigation
 import './Signup.css';
 
 const Signup = () => {
@@ -42,7 +42,7 @@ const Signup = () => {
 
             // Navigate to the login page after a short delay
             setTimeout(() => {
-                navigate('/login'); // Replace '/login' with your actual login route
+                navigate('/login'); // Redirect to login page
             }, 2000);
         } catch (err) {
             // Parse and set validation errors
@@ -54,6 +54,15 @@ const Signup = () => {
 
     return (
         <div className="signup-container">
+            {/* Navigation Bar */}
+            <nav className="navbar">
+                <div className="navbar-links">
+                    <Link to="/about-us" className="btn">About Us</Link>
+                    <Link to="/login" className="btn">Login</Link>
+                    <Link to="/" className="btn">Home</Link>
+                </div>
+            </nav>
+
             <div className="form-wrapper">
                 <h1 className="signup-heading">Sign Up</h1>
                 <form onSubmit={handleSignup} className="signup-form">
