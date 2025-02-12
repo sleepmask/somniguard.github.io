@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './AboutUs.css'; // Add custom styles for the About Us page
+import './AboutUs.css'; 
 
 function AboutUs() {
     return (
@@ -14,15 +14,23 @@ function AboutUs() {
                 </div>
             </nav>
 
-            <h1>About Us</h1>
+            <h1>Our Mission</h1>
             <p>
-                SomniGuard is dedicated to helping you improve your sleep quality through innovative technology.
-                Our mission is to make sure you sleep smarter and wake happier. 
-
+                SomniGuard is a smart sleep mask device designed to provide personalized therapeutics for users. Our goal is to help you implement small lifestyle changes to sleep smarter and wake happier.
             </p>
             <p>
                 Whether you suffer from sleep disorders or just want to improve your daily routine, our app is here to help!
             </p>
+
+            <h1>Who We Are</h1>
+            <p>
+                SomniGuard is a smart sleep mask device designed to provide personalized therapeutics for users. Our goal is to help you implement small lifestyle changes to sleep smarter and wake happier.
+            </p>
+
+             <div className="button-container">
+                <Link to="/signup" className="btn">Getting Started</Link>
+            </div>
+            
         </div>
     );
 }
