@@ -65,6 +65,20 @@ const Profile = ({ onLogout }) => {
 
     const today = new Date().toLocaleDateString();
 
+    // Age calculation function
+    const calculateAge = (birthDate) => {
+        const birth = new Date(birthDate);
+        const today = new Date();
+        let age = today.getFullYear() - birth.getFullYear();
+        const monthDifference = today.getMonth() - birth.getMonth();
+        // If the current month is before the birth month or if it's the same month but the current day is before the birth day, subtract 1 from age
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+        return age;
+    };
+
+
     if (loading) return <div className="profile-container"><p>Loading...</p></div>;
 
     if (!userData) {
@@ -120,7 +134,7 @@ const Profile = ({ onLogout }) => {
                         <div className="info-card"><h3>Last Name</h3><p>{userData.last_name}</p></div>
                         <div className="info-card"><h3>Email</h3><p>{userData.email}</p></div>
                         <div className="info-card"><h3>Date of Birth</h3><p>{userData.date_of_birth}</p></div>
-                        <div className="info-card"><h3>Age</h3><p>{new Date().getFullYear() - new Date(userData.date_of_birth).getFullYear()}</p></div>
+                        <div className="info-card"><h3>Age</h3><p>{calculateAge(userData.date_of_birth)}</p></div>
                         <div className="info-card"><h3>Join Date</h3><p>{userData.date_joined}</p></div>
                     </div>
                 </div>
