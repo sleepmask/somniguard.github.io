@@ -30,6 +30,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/getting-started" element={<GettingStarted />} />
                 <Route path="/login" element={isAuthenticated ? <Navigate to="/profile" /> : <Login />} />
                 <Route path="/signup" element={isAuthenticated ? <Navigate to="/login" /> : <Signup />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile onLogout={handleLogout} /> : <Navigate to="/login" />} />

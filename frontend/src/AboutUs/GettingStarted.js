@@ -14,7 +14,8 @@ function GettingStarted() {
                 </div>
             </nav>
 
-            <h1>Find instructions to set up your account and start improving your sleep below!</h1>
+            <h1>Instructions to set up your account</h1>
+            <h1>and start improving your sleep below!</h1>
             <p>
                 1. Find your device ID 
                 2. Click Create an Account in the navigation bar at the top right.

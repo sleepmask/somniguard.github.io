@@ -24,11 +24,11 @@ function AboutUs() {
 
             <h1>Who We Are</h1>
             <p>
-                SomniGuard is a smart sleep mask device designed to provide personalized therapeutics for users. Our goal is to help you implement small lifestyle changes to sleep smarter and wake happier.
+                We are a 14-member group from UCLA Biomedical Engineering Society Design Team who is working to make this device come to life. 
             </p>
 
              <div className="button-container">
-                <Link to="/signup" className="btn">Getting Started</Link>
+                <Link to="/getting-started" className="btn">Getting Started</Link>
             </div>
             
         </div>
