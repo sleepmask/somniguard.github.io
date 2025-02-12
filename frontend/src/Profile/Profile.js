@@ -84,9 +84,15 @@ const Profile = ({ onLogout }) => {
                     </div>
                     <nav className="nav2bar">
                         <div className="nav2bar-buttons">
-                            <button className="nav2-button">Heart Rate</button>
-                            <button className="nav2-button">Movement</button>
-                            <button className="nav2-button">SpO2</button>
+                            <Link to="/heart-rate" className="nav2-button">
+                                Heart Rate
+                            </Link>
+                            <Link to="/movement" className="nav2-button">
+                                Movement
+                            </Link>
+                            <Link to="/oxygen-saturation" className="nav2-button">
+                                SpO2
+                            </Link>
                             <button className="logout-button" onClick={handleLogout}>Logout</button>
                         </div>
                     </nav>
@@ -132,13 +138,13 @@ const Profile = ({ onLogout }) => {
                             {/* <Link to="/heart-rate" className="text-blue-500">View Heart Rate Data</Link> */}
                         </div>
                         <div className="metric-card">
-                            <Link to="/heart-rate" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <Link to="/movement" style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <h3>Movement</h3>
                                 <p>Track your movement during sleep to understand restlessness and identify patterns that affect your sleep cycles.</p>
                             </Link>
                         </div>
                         <div className="metric-card">
-                            <Link to="/heart-rate" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <Link to="/oxygen-saturation" style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <h3>SpO<sub>2</sub> Levels</h3>
                                 <p>Measure the oxygen saturation in your blood to ensure you're getting enough oxygen during sleep.</p>
                             </Link>

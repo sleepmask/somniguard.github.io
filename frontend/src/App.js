@@ -34,6 +34,8 @@ function App() {
                 <Route path="/profile" element={isAuthenticated ? <Profile onLogout={handleLogout} /> : <Navigate to="/login" />} />
                 <Route path="/heart-rate" element={<HeartRate />} />
                 <Route path="/movement" element={<Movement />} />
+                <Route path="/oxygen-saturation" element={<OxygenSaturation />} />
+
                 {/* <Route path="/oxygen" element={<OxygenSaturation />} /> */}
             </Routes>
         </Router>
