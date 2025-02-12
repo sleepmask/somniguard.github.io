@@ -9,6 +9,7 @@ import './App.css';
 import HeartRate from './Biometrics/HeartRate';
 import Movement from './Biometrics/Movement';
 import OxygenSaturation from './Biometrics/OxygenSaturation';
+import GettingStarted from './AboutUs/GettingStarted';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -35,8 +36,6 @@ function App() {
                 <Route path="/heart-rate" element={<HeartRate />} />
                 <Route path="/movement" element={<Movement />} />
                 <Route path="/oxygen-saturation" element={<OxygenSaturation />} />
-
-                {/* <Route path="/oxygen" element={<OxygenSaturation />} /> */}
             </Routes>
         </Router>
     );
