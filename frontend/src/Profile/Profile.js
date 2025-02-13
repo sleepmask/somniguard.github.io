@@ -92,7 +92,7 @@ const Profile = ({ onLogout }) => {
                 <div className="header-content">
                     <div className="header-left">
                         <div className="welcome-container">
-                            <h1 className="welcome-text">Welcome, {userData.first_name}!</h1>
+                            <h1 className="welcome-text">Welcome, {userData.first_name || userData.last_name || userData.username}!</h1>
                             <p className="date-time">{today} | {currentTime}</p>
                         </div>
                     </div>
