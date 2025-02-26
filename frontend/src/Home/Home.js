@@ -10,6 +10,7 @@ function Home() {
              <nav className="navbar">
                 <div className="navbar-links">
                     <Link to="/about-us" className="btn">About Us</Link>
+                    <Link to="/getting-started" className="btn">Getting Started</Link>
                     <Link to="/SignUp" className="btn create-account-btn">Create an Account</Link>
 
                     <Link to="/login" className="btn">Login</Link>

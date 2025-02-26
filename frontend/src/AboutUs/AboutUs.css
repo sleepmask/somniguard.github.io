@@ -50,6 +50,11 @@
             transform: scale(1.05);
         }
 
+        .about-us-page .ordered-list {
+            text-align: left; 
+            font-size: 1.5em; 
+        }
+
 @media (max-width: 768px) {
     .about-us-page h1 {
         font-size: 3rem; /* Adjust title size for smaller screens */

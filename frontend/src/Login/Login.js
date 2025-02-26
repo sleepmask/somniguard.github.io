@@ -36,8 +36,8 @@ const Login = () => {
             {/* Navigation bar at the top */}
             <nav className="navbar">
                 <div className="navbar-links">
+                    <Link to="/SignUp" className="btn create-account-btn">Create an Account</Link>
                     <Link to="/" className="btn">Home</Link>
-                    <Link to="/about-us" className="btn">About Us</Link>
                 </div>
             </nav>
 

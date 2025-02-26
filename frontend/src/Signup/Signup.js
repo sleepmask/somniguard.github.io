@@ -57,7 +57,6 @@ const Signup = () => {
             {/* Navigation Bar */}
             <nav className="navbar">
                 <div className="navbar-links">
-                    <Link to="/about-us" className="btn">About Us</Link>
                     <Link to="/login" className="btn">Login</Link>
                     <Link to="/" className="btn">Home</Link>
                 </div>
