@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import '../Profile/Profile.css';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import './Biometrics.css';
 
 const OxygenSaturation = () => {
     const [oxygenSaturationData, setOxygenSaturationData] = useState(null);
@@ -9,31 +10,59 @@ const OxygenSaturation = () => {
     useEffect(() => {
         const fetchOxygenSaturation = async () => {
             try {
-                // Simulate fetching data for oxygen saturation (replace with real API call)
-                const sampleData = {
-                    saturation: 98, // Example SpO2 value
-                    timestamp: '2025-02-04 10:00:00',
-                };
-                setOxygenSaturationData(sampleData); // Set the sample data as oxygen saturation
+                const response = await fetch("http://127.0.0.1:8000/api/oxygen-saturation/");
+                if (!response.ok) {
+                    throw new Error("Failed to fetch oxygen saturation data");
+                }
+                const data = await response.json();
+
+                // Convert timestamp to readable time format for chart
+                const formattedData = data.map(entry => ({
+                    time: new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    saturation: entry.data_value,
+                }));
+
+                setOxygenSaturationData(formattedData);
             } catch (error) {
                 setError(true);
-                console.error('Error fetching oxygen saturation data:', error);
+                console.error("Error fetching oxygen saturation data:", error);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchOxygenSaturation(); // Call the function when the component mounts
-    }, []); // Empty dependency array ensures this runs once on mount
+        fetchOxygenSaturation();
+    }, []);
 
     if (loading) return <div>Loading oxygen saturation data...</div>;
     if (error) return <div>Error fetching oxygen saturation data.</div>;
 
     return (
-        <div className="oxygen-saturation-container">
-            <h1>Oxygen Saturation (SpO2)</h1>
-            <p><strong>SpO2 Level:</strong> {oxygenSaturationData?.saturation}%</p>
-            <p><strong>Timestamp:</strong> {oxygenSaturationData?.timestamp}</p>
+        <div className="heart-rate-container">
+            <h2>Oxygen Saturation (SpO2)</h2>
+
+            <div className="chart-container">
+                <LineChart
+                    width={600}
+                    height={300}
+                    data={oxygenSaturationData}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="time" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="saturation" stroke="#82ca9d" />
+                </LineChart>
+            </div>
+
+            <p className="timestamp-text">
+                Current SpO2 Level: {oxygenSaturationData[oxygenSaturationData.length - 1]?.saturation}%
+            </p>
+            <p className="timestamp-text">
+                Last Updated: {new Date().toLocaleString()}
+            </p>
         </div>
     );
 };

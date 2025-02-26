@@ -1,66 +1,68 @@
-// Movement.js
 import React, { useState, useEffect } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import './Biometrics.css';
 
-// const Movement = () => {
-//     const [movementData, setMovementData] = useState(null);
-//     const [loading, setLoading] = useState(true);
-//     const [error, setError] = useState(false);
+const MovementData = () => {
+    const [movementData, setMovementData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
-//     useEffect(() => {
-//         const fetchMovementData = async () => {
-//             try {
-//                 // Simulate fetching movement data (replace with real API call)
-//                 const sampleData = {
-//                     movement: 'Low', // Example movement level
-//                     timestamp: '2025-02-04 10:00:00',
-//                 };
-//                 setMovementData(sampleData); // Set the sample movement data
-//             } catch (error) {
-//                 setError(true);
-//                 console.error('Error fetching movement data:', error);
-//             } finally {
-//                 setLoading(false);
-//             }
-//         };
-
-//         fetchMovementData(); // Call the function when the component mounts
-//     }, []); // Empty dependency array ensures this runs once on mount
-
-//     if (loading) return <div>Loading movement data...</div>;
-//     if (error) return <div>Error fetching movement data.</div>;
-
-//     return (
-//         <div className="movement-container">
-//             <h1>Movement</h1>
-//             <p><strong>Movement Level:</strong> {movementData?.movement}</p>
-//             <p><strong>Timestamp:</strong> {movementData?.timestamp}</p>
-//         </div>
-//     );
-// };
-
-// export default Movement;
-const Movement = () => {
-    const [sleepData, setSleepData] = useState([]);
-  
     useEffect(() => {
-      fetch("http://127.0.0.1:8000/api/sleep-data/") // Adjust URL if needed
-        .then((response) => response.json())
-        .then((data) => setSleepData(data))
-        .catch((error) => console.error("Error fetching sleep data:", error));
+        const fetchMovementData = async () => {
+            try {
+                const response = await fetch("http://127.0.0.1:8000/api/movement/");
+                if (!response.ok) {
+                    throw new Error("Failed to fetch movement data");
+                }
+                const data = await response.json();
+                const formattedData = data.map(entry => ({
+                  time: new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                  accel_x: entry.accel_x,
+                  accel_y: entry.accel_y,
+                  accel_z: entry.accel_z
+              }));
+              setMovementData(formattedData);
+            } catch (error) {
+                setError(true);
+                console.error("Error fetching movement data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchMovementData();
     }, []);
-  
+
+    if (loading) return <div>Loading movement data...</div>;
+    if (error) return <div>Error fetching movement data.</div>;
+
     return (
-      <div>
-        <h1>Sleep Data</h1>
-        <ul>
-          {sleepData.map((entry) => (
-            <li key={entry.data_id}>
-              {entry.data_type}: {entry.data_value} (Recorded at {entry.timestamp})
-            </li>
-          ))}
-        </ul>
-      </div>
+        <div className="heart-rate-container">
+            <h2>Movement Data (Acceleration on X, Y, Z)</h2>
+
+            <div className="chart-container">
+                <LineChart
+                    width={600}
+                    height={300}
+                    data={movementData}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="time" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="accel_x" stroke="#8884d8" />
+                    <Line type="monotone" dataKey="accel_y" stroke="#82ca9d" />
+                    <Line type="monotone" dataKey="accel_z" stroke="#ff0000" />
+                </LineChart>
+            </div>
+
+            <p className="timestamp-text">
+                Last updated: {new Date().toLocaleString()}
+            </p>
+        </div>
     );
-  };
-  
-  export default Movement;
+};
+
+export default MovementData;
