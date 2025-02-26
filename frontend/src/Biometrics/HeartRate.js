@@ -4,6 +4,7 @@ import './Biometrics.css';
 
 const HeartRate = () => {
     const [heartRateData, setHeartRateData] = useState(null);
+    const [averageHeartRate, setAverageHeartRate] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
@@ -23,6 +24,12 @@ const HeartRate = () => {
                 }));
 
                 setHeartRateData(formattedData);
+
+                // Calculate average heart rate
+                const totalBpm = formattedData.reduce((sum, entry) => sum + entry.bpm, 0);
+                const avgBpm = formattedData.length ? (totalBpm / formattedData.length).toFixed(1) : 0;
+                setAverageHeartRate(avgBpm);
+
             } catch (error) {
                 setError(true);
                 console.error("Error fetching heart rate data:", error);
@@ -33,31 +40,6 @@ const HeartRate = () => {
 
         fetchHeartRate();
     }, []);
-    //         try {
-    //             // Simulate fetching data for heart rate (replace with real API call)
-    //             const sampleData = {
-    //                 rate: 72, // Sample heart rate in BPM
-    //                 timestamp: '2025-02-04 10:00:00',
-    //             };
-    //             setHeartRateData(sampleData); // Set the sample data as heart rate
-    //         } catch (error) {
-    //             setError(true);
-    //             console.error('Error fetching heart rate data:', error);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-
-    //     fetchHeartRate(); // Call the function when the component mounts
-    // }, []); // Empty dependency array ensures this runs once on mount
-    //  // Sample heart rate history for graph (replace with real API data)
-    //  const sampleGraphData = [
-    //     { time: '10:00', bpm: 70 },
-    //     { time: '10:01', bpm: 72 },
-    //     { time: '10:02', bpm: 73 },
-    //     { time: '10:03', bpm: 71 },
-    //     { time: '10:04', bpm: 74 },
-    // ];
 
     if (loading) return <div>Loading heart rate data...</div>;
     if (error) return <div>Error fetching heart rate data.</div>;
@@ -69,7 +51,7 @@ const HeartRate = () => {
                 <svg className="heart" viewBox="0 0 32 29.6">
                     <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
                         c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
-                </svg> {heartRateData?.bpm} BPM
+                 </svg> {heartRateData.length > 0 ? heartRateData[heartRateData.length - 1].bpm : "--"} BPM
             </h2>
 
             <div className="chart-container">
@@ -87,6 +69,9 @@ const HeartRate = () => {
                     <Line type="monotone" dataKey="bpm" stroke="#8884d8" />
                 </LineChart>
             </div>
+
+            {/* Display Average Heart Rate */}
+            <p className="avg-heart-rate">Average Heart Rate (Last Night): <strong>{averageHeartRate} BPM</strong></p>
 
             {/* <p className="timestamp-text">Last updated: {heartRateData?.timestamp}</p> */}
             <p className="timestamp-text">
