@@ -34,11 +34,32 @@ const OxygenSaturation = () => {
         fetchOxygenSaturation();
     }, []);
 
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        setOxygenSaturationData(null);
+        setError(false);
+        setLoading(false);
+        // Redirect to the login page after logging out
+        window.location.href = '/login'; 
+    };
+
+    const handleProfile = () => {
+        // Navigate to the profile page
+        window.location.href = '/profile'; 
+    };
+
     if (loading) return <div>Loading oxygen saturation data...</div>;
     if (error) return <div>Error fetching oxygen saturation data.</div>;
 
     return (
         <div className="heart-rate-container">
+            <div className="nav2bar">
+                <div className="nav2bar-buttons">
+                    <button className="nav2-button" onClick={handleProfile}>Profile</button>
+                    <button className="logout-button" onClick={handleLogout}>Logout</button>
+                </div>
+            </div>
+            
             <h2>Oxygen Saturation (SpO2)</h2>
 
             <div className="chart-container">

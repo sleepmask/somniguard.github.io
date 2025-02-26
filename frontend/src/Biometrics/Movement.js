@@ -33,11 +33,32 @@ const MovementData = () => {
         fetchMovementData();
     }, []);
 
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        setMovementData(null);
+        setError(false);
+        setLoading(false);
+        // Redirect to the login page after logging out
+        window.location.href = '/login'; 
+    };
+
+    const handleProfile = () => {
+        // Navigate back to the profile page
+        window.location.href = '/profile'; 
+    };
+
     if (loading) return <div>Loading movement data...</div>;
     if (error) return <div>Error fetching movement data.</div>;
 
     return (
         <div className="heart-rate-container">
+            <div className="nav2bar">
+                <div className="nav2bar-buttons">
+                    <button className="nav2-button" onClick={handleProfile}>Profile</button>
+                    <button className="logout-button" onClick={handleLogout}>Logout</button>
+                </div>
+            </div>
+            
             <h2>Movement Data (Acceleration on X, Y, Z)</h2>
 
             <div className="chart-container">

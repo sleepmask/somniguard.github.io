@@ -46,3 +46,35 @@
     font-size: 1.5rem;
     color: #ffffff;
 }
+
+/* Navigation Bar */
+.nav2bar {
+    position: absolute;  /* Ensures it's positioned relative to the screen */
+    top: 20px;  /* Position from the top */
+    right: 20px; /* Position from the right */
+    display: flex;
+    align-items: center;
+}
+
+.nav2bar-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.nav2-button,
+.logout-button {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.nav2-button:hover,
+.logout-button:hover {
+    background-color: #162d5a;
+}
