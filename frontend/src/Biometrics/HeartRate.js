@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'; 
-import './Biometrics.css'; 
+import './Biometrics.css';
+import { serverURL } from '../api';
 
 const HeartRate = () => {
     const [heartRateData, setHeartRateData] = useState(null);
@@ -11,7 +12,7 @@ const HeartRate = () => {
     useEffect(() => {
         const fetchHeartRate = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:8000/api/heart-rate/");
+                const response = await fetch(`${serverURL}api/heart-rate/`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch");
                 }

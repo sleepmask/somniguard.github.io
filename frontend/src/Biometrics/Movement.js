@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import './Biometrics.css';
+import { serverURL } from '../api';
 
 const MovementData = () => {
     const [movementData, setMovementData] = useState(null);
@@ -10,7 +11,7 @@ const MovementData = () => {
     useEffect(() => {
         const fetchMovementData = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:8000/api/movement/");
+                const response = await fetch(`${serverURL}api/movement/`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch movement data");
                 }

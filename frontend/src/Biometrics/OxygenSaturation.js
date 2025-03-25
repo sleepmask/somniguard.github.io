@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import './Biometrics.css';
+import { serverURL } from '../api';
 
 const OxygenSaturation = () => {
     const [oxygenSaturationData, setOxygenSaturationData] = useState(null);
@@ -10,7 +11,7 @@ const OxygenSaturation = () => {
     useEffect(() => {
         const fetchOxygenSaturation = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:8000/api/oxygen-saturation/");
+                const response = await fetch(`${serverURL}api/oxygen-saturation/`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch oxygen saturation data");
                 }

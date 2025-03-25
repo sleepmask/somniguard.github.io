@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // For navigation links
 import './Profile.css';
+import { serverURL } from '../api';
 
 const Profile = ({ onLogout }) => {
     const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ const Profile = ({ onLogout }) => {
                     return;
                 }
 
-                const response = await fetch('http://127.0.0.1:8000/profile/', {
+                const response = await fetch(`${serverURL}profile/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
