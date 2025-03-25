@@ -26,7 +26,7 @@ function App() {
     };
 
     return (
-        <Router>
+        <Router basename="/somniguard.github.io">
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about-us" element={<AboutUs />} />
