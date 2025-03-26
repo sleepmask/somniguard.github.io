@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../api';  // Import the login function from api.js
 import './Login.css';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
     const [username, setUsername] = useState(''); // State for username
     const [password, setPassword] = useState(''); // State for password
     const [error, setError] = useState(''); // State for error messages
+    const navigate = useNavigate();
 
     // Define the handleLogin function inside the component
     const handleLogin = async (e) => {
@@ -23,7 +24,8 @@ const Login = () => {
             console.log('Refresh Token Stored:', localStorage.getItem('refresh_token'));
 
             alert(`Welcome ${username}`); // Optionally show a welcome message
-            window.location.href = '/profile'; // Redirect to the profile page
+            onLogin();
+            navigate('/profile');
         } catch (err) {
             // Display error message if login fails
             setError(err.message || 'Login failed');

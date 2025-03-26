@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // For navigation links
+import { Link, useNavigate } from 'react-router-dom'; // For navigation links
 import './Profile.css';
 import { serverURL } from '../api';
 
@@ -8,6 +8,7 @@ const Profile = ({ onLogout }) => {
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(false);
     const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -61,7 +62,7 @@ const Profile = ({ onLogout }) => {
         setError(false);    
         setLoading(false);
         onLogout();
-        window.location.href = '/login';
+        navigate('/login');
     };
 
     const today = new Date().toLocaleDateString();

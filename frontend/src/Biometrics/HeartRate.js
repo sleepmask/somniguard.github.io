@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'; 
 import './Biometrics.css';
 import { serverURL } from '../api';
@@ -8,6 +9,7 @@ const HeartRate = () => {
     const [averageHeartRate, setAverageHeartRate] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchHeartRate = async () => {
@@ -46,12 +48,12 @@ const HeartRate = () => {
         setError(false);
         setLoading(false);
         // Redirect to the login page after logging out
-        window.location.href = '/login'; 
+        navigate('/login'); 
     };
 
     const handleProfile = () => {
         // Navigate back to the profile page
-        window.location.href = '/profile'; 
+        navigate('/profile'); 
     };
 
     if (loading) return <div>Loading heart rate data...</div>;
