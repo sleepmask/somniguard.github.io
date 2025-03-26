@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/somniguard.github.io/static/css/main.895e085c.css",
-    "main.js": "/somniguard.github.io/static/js/main.bba72fe4.js",
+    "main.js": "/somniguard.github.io/static/js/main.a818e24d.js",
     "static/js/453.d855a71b.chunk.js": "/somniguard.github.io/static/js/453.d855a71b.chunk.js",
     "static/media/logo.png": "/somniguard.github.io/static/media/logo.679a6ad93e7a2dc3fd33.png",
     "index.html": "/somniguard.github.io/index.html",
     "main.895e085c.css.map": "/somniguard.github.io/static/css/main.895e085c.css.map",
-    "main.bba72fe4.js.map": "/somniguard.github.io/static/js/main.bba72fe4.js.map",
+    "main.a818e24d.js.map": "/somniguard.github.io/static/js/main.a818e24d.js.map",
     "453.d855a71b.chunk.js.map": "/somniguard.github.io/static/js/453.d855a71b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.895e085c.css",
-    "static/js/main.bba72fe4.js"
+    "static/js/main.a818e24d.js"
   ]
 }
