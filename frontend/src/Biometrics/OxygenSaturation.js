@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import './Biometrics.css';
 import { serverURL } from '../api';
@@ -7,6 +8,7 @@ const OxygenSaturation = () => {
     const [oxygenSaturationData, setOxygenSaturationData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchOxygenSaturation = async () => {
@@ -41,12 +43,12 @@ const OxygenSaturation = () => {
         setError(false);
         setLoading(false);
         // Redirect to the login page after logging out
-        window.location.href = '/login'; 
+        navigate('/login'); 
     };
 
     const handleProfile = () => {
         // Navigate to the profile page
-        window.location.href = '/profile'; 
+        navigate('/profile'); 
     };
 
     if (loading) return <div>Loading oxygen saturation data...</div>;

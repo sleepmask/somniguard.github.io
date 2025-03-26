@@ -14,15 +14,24 @@ import GettingStarted from './AboutUs/GettingStarted';
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    useEffect(() => {
+    const checkAuth = () => {
         const token = localStorage.getItem('access_token');
         setIsAuthenticated(!!token);
+    };
+
+    useEffect(() => {
+        checkAuth();
     }, []);
+
+    const handleLogin = () => {
+        checkAuth();
+    };
 
     const handleLogout = () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         setIsAuthenticated(false);
+        checkAuth();
     };
 
     return (
@@ -31,7 +40,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/getting-started" element={<GettingStarted />} />
-                <Route path="/login" element={isAuthenticated ? <Navigate to="/profile" /> : <Login />} />
+                <Route path="/login" element={isAuthenticated ? <Navigate to="/profile" /> : <Login onLogin={handleLogin} />} />
                 <Route path="/signup" element={isAuthenticated ? <Navigate to="/login" /> : <Signup />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile onLogout={handleLogout} /> : <Navigate to="/login" />} />
                 <Route path="/heart-rate" element={<HeartRate />} />
