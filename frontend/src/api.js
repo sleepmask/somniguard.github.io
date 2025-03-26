@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const serverURL = 'http://54.183.21.65:8000/';
+export const serverURL = 'https://sleep-ec2.guojasonliu.com:8001/';
 
 // Create an axios instance with your Django backend URL
 const API = axios.create({
