@@ -134,7 +134,7 @@ const Profile = ({ onLogout }) => {
                     <div className="user-info-grid">
                         <div className="info-card"><h3>Name</h3><p>{userData.first_name + " " + userData.last_name}</p></div>
                         <div className="info-card"><h3>Email</h3><p>{userData.email}</p></div>
-                        <div className="info-card"><h3>Device ID</h3><p>{}</p></div>
+                        <div className="info-card"><h3>Device ID</h3>Coming soon...<p>{}</p></div>
                         <div className="info-card"><h3>Date of Birth</h3><p>{userData.date_of_birth}</p></div>
                         <div className="info-card"><h3>Age</h3><p>{calculateAge(userData.date_of_birth)}</p></div>
                         <div className="info-card"><h3>Join Date</h3><p>{userData.date_joined}</p></div>
