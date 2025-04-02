@@ -30,6 +30,12 @@ const Profile = ({ onLogout }) => {
                         'Content-Type': 'application/json',
                     },
                 });
+                if (response.status === 401) {
+                    console.error('Token is invalid or expired');
+                    localStorage.removeItem('access_token');  
+                    navigate('/login'); 
+                    return;
+                }
 
                 if (response.ok) {
                     const data = await response.json();
