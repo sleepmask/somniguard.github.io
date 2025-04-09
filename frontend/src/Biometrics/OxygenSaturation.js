@@ -42,7 +42,7 @@ const OxygenSaturation = () => {
         setOxygenSaturationData(null);
         setError(false);
         setLoading(false);
-        navigate('/'); 
+        navigate('/somniguard.github.io/');
     };
 
     const handleProfile = () => {
