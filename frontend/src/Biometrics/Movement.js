@@ -41,8 +41,7 @@ const MovementData = () => {
         setMovementData(null);
         setError(false);
         setLoading(false);
-        // Redirect to the login page after logging out
-        navigate('/login'); 
+        navigate('/');
     };
 
     const handleProfile = () => {
