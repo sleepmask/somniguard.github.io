@@ -43,9 +43,9 @@ function App() {
                 <Route path="/login" element={isAuthenticated ? <Navigate to="/profile" /> : <Login onLogin={handleLogin} />} />
                 <Route path="/signup" element={isAuthenticated ? <Navigate to="/login" /> : <Signup />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile onLogout={handleLogout} /> : <Navigate to="/login" />} />
-                <Route path="/heart-rate" element={<HeartRate />} />
-                <Route path="/movement" element={<Movement />} />
-                <Route path="/oxygen-saturation" element={<OxygenSaturation />} />
+                <Route path="/heart-rate" element={isAuthenticated ? <HeartRate /> : <Navigate to="/" />} />
+                <Route path="/movement" element={isAuthenticated ? <Movement /> : <Navigate to="/" />} />
+                <Route path="/oxygen-saturation" element={isAuthenticated ? <OxygenSaturation /> : <Navigate to="/" />} />
             </Routes>
         </Router>
     );
