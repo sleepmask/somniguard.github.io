@@ -10,6 +10,7 @@ import HeartRate from './Biometrics/HeartRate';
 import Movement from './Biometrics/Movement';
 import OxygenSaturation from './Biometrics/OxygenSaturation';
 import GettingStarted from './AboutUs/GettingStarted';
+import { useLocation } from 'react-router-dom';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -33,6 +34,12 @@ function App() {
         setIsAuthenticated(false);
         checkAuth();
     };
+
+    const location = useLocation();
+
+    useEffect(() => {
+        checkAuth();
+    }, [location.pathname]);
 
     return (
         <Router basename="/somniguard.github.io">
