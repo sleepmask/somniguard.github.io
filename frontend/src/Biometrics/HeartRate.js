@@ -97,20 +97,25 @@ const HeartRate = () => {
                  </svg> {averageHeartRate} BPM
             </h2>
 
-            <label htmlFor="date-picker">Select Sleep Night: </label>
+            <div className="controls-container">
+                <label htmlFor="date-picker">Select Sleep Night:</label>
                 <select
                     id="date-picker"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
+                    className="date-select"
                 >
                     {availableDates.map(date => (
                         <option key={date} value={date}>{date}</option>
                     ))}
                 </select>
 
-                <p>
-                    Showing data from <strong>{selectedDate} 8:00 PM</strong> to <strong>{new Date(new Date(selectedDate).getTime() + 16 * 60 * 60 * 1000).toISOString().split('T')[0]} 12:00 PM</strong>
+                <p className="date-range-text">
+                    Showing data from <strong>{selectedDate} 8:00 PM</strong> to <strong>
+                    {new Date(new Date(selectedDate).getTime() + 16 * 60 * 60 * 1000).toISOString().split('T')[0]} 12:00 PM
+                    </strong>
                 </p>
+            </div>
 
             <div className="chart-container">
                 <LineChart
