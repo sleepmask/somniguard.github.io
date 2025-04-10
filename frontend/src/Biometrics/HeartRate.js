@@ -16,6 +16,8 @@ const HeartRate = () => {
         return today.toISOString().split("T")[0]; // e.g. "2025-04-09"
     });
 
+    const [availableDates, setAvailableDates] = useState([]);
+
     const fetchHeartRate = async () => {
         try {
             setLoading(true);
@@ -44,6 +46,24 @@ const HeartRate = () => {
     useEffect(() => {
         fetchHeartRate();
     }, [selectedDate]);
+
+    useEffect(() => {
+        const fetchAvailableDates = async () => {
+            try {
+                const response = await fetch(`${serverURL}api/available-sleep-dates/`);
+                const dates = await response.json();
+                setAvailableDates(dates);
+                // Default to the most recent date
+                if (dates.length > 0) {
+                    setSelectedDate(dates[0]);
+                }
+            } catch (err) {
+                console.error("Failed to fetch available dates:", err);
+            }
+        };
+    
+        fetchAvailableDates();
+    }, []);    
 
     const handleLogout = () => {
         localStorage.removeItem('access_token');
@@ -79,14 +99,19 @@ const HeartRate = () => {
 
             <div className="chart-container">
                 <label htmlFor="date-picker">Select Sleep Night: </label>
-                <input
+                <select
                     id="date-picker"
-                    type="date"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
-                    max={new Date().toISOString().split("T")[0]}
-                />
-                <button onClick={fetchHeartRate}>Refresh</button>
+                >
+                    {availableDates.map(date => (
+                        <option key={date} value={date}>{date}</option>
+                    ))}
+                </select>
+
+                <p>
+                    Showing data from <strong>{selectedDate} 8:00 PM</strong> to <strong>{new Date(new Date(selectedDate).getTime() + 16 * 60 * 60 * 1000).toISOString().split('T')[0]} 12:00 PM</strong>
+                </p>
 
                 <LineChart
                     width={600}
@@ -101,6 +126,9 @@ const HeartRate = () => {
                     <Legend />
                     <Line type="monotone" dataKey="bpm" stroke="#8884d8" />
                 </LineChart>
+                {heartRateData && heartRateData.length === 0 && (
+                    <p>No heart rate data found for the selected sleep night.</p>
+                )}
             </div>
 
             <p className="avg-heart-rate">Average Heart Rate (Last Night): <strong>{averageHeartRate} BPM</strong></p>
