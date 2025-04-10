@@ -11,43 +11,46 @@ const HeartRate = () => {
     const [error, setError] = useState(false);
     const navigate = useNavigate();
 
+    const [selectedDate, setSelectedDate] = useState(() => {
+        const today = new Date();
+        return today.toISOString().split("T")[0]; // e.g. "2025-04-09"
+    });
+
+    const fetchHeartRate = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(`${serverURL}api/heart-rate/?date=${selectedDate}`);
+            if (!response.ok) throw new Error("Failed to fetch");
+            const data = await response.json();
+    
+            const formattedData = data.map(entry => ({
+                time: new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                bpm: entry.data_value
+            }));
+    
+            setHeartRateData(formattedData);
+    
+            const totalBpm = formattedData.reduce((sum, entry) => sum + entry.bpm, 0);
+            const avgBpm = formattedData.length ? (totalBpm / formattedData.length).toFixed(1) : 0;
+            setAverageHeartRate(avgBpm);
+        } catch (error) {
+            setError(true);
+            console.error("Error fetching heart rate data:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    
     useEffect(() => {
-        const fetchHeartRate = async () => {
-            try {
-                const response = await fetch(`${serverURL}api/heart-rate/`);
-                if (!response.ok) {
-                    throw new Error("Failed to fetch");
-                }
-                const data = await response.json();
-
-                const formattedData = data.map(entry => ({
-                    time: new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    bpm: entry.data_value
-                }));
-
-                setHeartRateData(formattedData);
-
-                const totalBpm = formattedData.reduce((sum, entry) => sum + entry.bpm, 0);
-                const avgBpm = formattedData.length ? (totalBpm / formattedData.length).toFixed(1) : 0;
-                setAverageHeartRate(avgBpm);
-
-            } catch (error) {
-                setError(true);
-                console.error("Error fetching heart rate data:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchHeartRate();
-    }, []);
+    }, [selectedDate]);
 
     const handleLogout = () => {
         localStorage.removeItem('access_token');
         setHeartRateData(null);
         setError(false);
         setLoading(false);
-        navigate('/');
+        navigate('/somniguard.github.io/');
     };
 
     const handleProfile = () => {
@@ -71,10 +74,20 @@ const HeartRate = () => {
                 <svg className="heart" viewBox="0 0 32 29.6">
                     <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
                         c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
-                 </svg> {heartRateData && heartRateData.length > 0 ? heartRateData[heartRateData.length - 1].bpm : "--"} BPM
+                 </svg> {averageHeartRate} BPM
             </h2>
 
             <div className="chart-container">
+                <label htmlFor="date-picker">Select Sleep Night: </label>
+                <input
+                    id="date-picker"
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    max={new Date().toISOString().split("T")[0]}
+                />
+                <button onClick={fetchHeartRate}>Refresh</button>
+
                 <LineChart
                     width={600}
                     height={300}
