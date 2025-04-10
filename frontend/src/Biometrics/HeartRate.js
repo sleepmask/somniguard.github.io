@@ -97,8 +97,7 @@ const HeartRate = () => {
                  </svg> {averageHeartRate} BPM
             </h2>
 
-            <div className="chart-container">
-                <label htmlFor="date-picker">Select Sleep Night: </label>
+            <label htmlFor="date-picker">Select Sleep Night: </label>
                 <select
                     id="date-picker"
                     value={selectedDate}
@@ -113,6 +112,7 @@ const HeartRate = () => {
                     Showing data from <strong>{selectedDate} 8:00 PM</strong> to <strong>{new Date(new Date(selectedDate).getTime() + 16 * 60 * 60 * 1000).toISOString().split('T')[0]} 12:00 PM</strong>
                 </p>
 
+            <div className="chart-container">
                 <LineChart
                     width={600}
                     height={300}
