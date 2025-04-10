@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/somniguard.github.io/static/css/main.b78aa199.css",
-    "main.js": "/somniguard.github.io/static/js/main.093589e7.js",
+    "main.css": "/somniguard.github.io/static/css/main.dd48f73f.css",
+    "main.js": "/somniguard.github.io/static/js/main.2cb1cb37.js",
     "static/js/453.d855a71b.chunk.js": "/somniguard.github.io/static/js/453.d855a71b.chunk.js",
     "static/media/logo.png": "/somniguard.github.io/static/media/logo.679a6ad93e7a2dc3fd33.png",
     "index.html": "/somniguard.github.io/index.html",
-    "main.b78aa199.css.map": "/somniguard.github.io/static/css/main.b78aa199.css.map",
-    "main.093589e7.js.map": "/somniguard.github.io/static/js/main.093589e7.js.map",
+    "main.dd48f73f.css.map": "/somniguard.github.io/static/css/main.dd48f73f.css.map",
+    "main.2cb1cb37.js.map": "/somniguard.github.io/static/js/main.2cb1cb37.js.map",
     "453.d855a71b.chunk.js.map": "/somniguard.github.io/static/js/453.d855a71b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b78aa199.css",
-    "static/js/main.093589e7.js"
+    "static/css/main.dd48f73f.css",
+    "static/js/main.2cb1cb37.js"
   ]
 }
