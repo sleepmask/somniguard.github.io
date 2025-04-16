@@ -68,7 +68,7 @@ const Profile = ({ onLogout }) => {
         setError(false);    
         setLoading(false);
         onLogout();
-        navigate('/somniguard.github.io/');
+        navigate('/');
     };
 
     const today = new Date().toLocaleDateString();

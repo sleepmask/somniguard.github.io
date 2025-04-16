@@ -70,7 +70,7 @@ const HeartRate = () => {
         setHeartRateData(null);
         setError(false);
         setLoading(false);
-        navigate('/somniguard.github.io/');
+        navigate('/');
     };
 
     const handleProfile = () => {
