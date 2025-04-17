@@ -90,7 +90,7 @@ const HeartRate = () => {
         navigate('/profile'); 
     };
 
-    if (loading) return <div>Loading heart rate data...</div>;
+    // if (loading) return <div>Loading heart rate data...</div>;
     if (error) return <div>Error fetching heart rate data.</div>;
 
     return (
@@ -109,27 +109,29 @@ const HeartRate = () => {
                  </svg> {averageHeartRate} BPM
             </h2>
 
-            <div className="controls-container">
-                <label htmlFor="date-picker">Select Sleep Night:</label>
-                <select
-                    id="date-picker"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    className="date-select"
-                >
-                    {availableDates.map(date => (
-                        <option key={date} value={date}>{date}</option>
-                    ))}
-                </select>
+            {availableDates.length > 0 && (
+                <div className="controls-container">
+                    <label htmlFor="date-picker">Select Sleep Night:</label>
+                    <select
+                        id="date-picker"
+                        value={selectedDate}
+                        onChange={(e) => setSelectedDate(e.target.value)}
+                        className="date-select"
+                    >
+                        {availableDates.map(date => (
+                            <option key={date} value={date}>{date}</option>
+                        ))}
+                    </select>
 
-                <p className="date-range-text">
-                    Showing data from <strong>{selectedDate} 8:00 PM</strong> to <strong>
-                    {new Date(new Date(selectedDate).getTime() + 16 * 60 * 60 * 1000).toISOString().split('T')[0]} 12:00 PM
-                    </strong>
-                </p>
-            </div>
+                    <p className="date-range-text">
+                        Showing data from <strong>{selectedDate} 8:00 PM</strong> to <strong>
+                        {new Date(new Date(selectedDate).getTime() + 16 * 60 * 60 * 1000).toISOString().split('T')[0]} 12:00 PM
+                        </strong>
+                    </p>
+                </div>
+            )}
 
-            {sessions.length > 1 && (
+            {sessions.length > 1 && sessions.every(s => s.length > 0) && (
                 <div className="session-selector">
                     <label>Select Session: </label>
                     <select
@@ -166,24 +168,28 @@ const HeartRate = () => {
                 </div>
             )}
 
-            <div className="chart-container">
-                <LineChart
-                    width={600}
-                    height={300}
-                    data={heartRateData || []} // If heartRateData is null, pass an empty array
-                    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="time" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="bpm" stroke="#8884d8" />
-                </LineChart>
-                {heartRateData && heartRateData.length === 0 && (
-                    <p>No heart rate data found for the selected sleep night.</p>
-                )}
-            </div>
+            {loading ? (    
+              <div>Loading heart rate data...</div>
+            ) : (
+                <div className="chart-container">
+                    <LineChart
+                        width={600}
+                        height={300}
+                        data={heartRateData || []} // If heartRateData is null, pass an empty array
+                        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="time" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line type="monotone" dataKey="bpm" stroke="#8884d8" />
+                    </LineChart>
+                    {heartRateData && heartRateData.length === 0 && (
+                        <p>No heart rate data found for the selected sleep night.</p>
+                    )}
+                </div>
+            )}
 
             <p className="avg-heart-rate">Average Heart Rate (Last Night): <strong>{averageHeartRate} BPM</strong></p>
 
