@@ -106,3 +106,12 @@
     align-items: center;
     flex-direction: column;
 }
+
+.session-selector {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+

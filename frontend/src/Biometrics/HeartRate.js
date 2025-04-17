@@ -13,28 +13,41 @@ const HeartRate = () => {
 
     const [selectedDate, setSelectedDate] = useState(() => {
         const today = new Date();
-        return today.toISOString().split("T")[0]; // e.g. "2025-04-09"
+        return today.toISOString().split("T")[0];
     });
 
     const [availableDates, setAvailableDates] = useState([]);
+    const [sessions, setSessions] = useState([]);
+    const [currentSessionIndex, setCurrentSessionIndex] = useState(0);
 
     const fetchHeartRate = async () => {
         try {
             setLoading(true);
             const response = await fetch(`${serverURL}api/heart-rate/?date=${selectedDate}`);
             if (!response.ok) throw new Error("Failed to fetch");
-            const data = await response.json();
+            const result = await response.json();
     
-            const formattedData = data.map(entry => ({
-                time: new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                bpm: entry.data_value
-            }));
+            // Store all sessions
+            setSessions(result.sessions);
     
-            setHeartRateData(formattedData);
+            // Default: show first session
+            if (result.sessions.length > 0) {
+                setCurrentSessionIndex(0);
+                const selected = result.sessions[0];
+                const formatted = selected.map(entry => ({
+                    time: new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    bpm: entry.data_value
+                }));
+                setHeartRateData(formatted);
     
-            const totalBpm = formattedData.reduce((sum, entry) => sum + entry.bpm, 0);
-            const avgBpm = formattedData.length ? (totalBpm / formattedData.length).toFixed(1) : 0;
-            setAverageHeartRate(avgBpm);
+                const totalBpm = formatted.reduce((sum, e) => sum + e.bpm, 0);
+                const avg = formatted.length ? (totalBpm / formatted.length).toFixed(1) : 0;
+                setAverageHeartRate(avg);
+            } else {
+                setHeartRateData([]);
+                setAverageHeartRate(0);
+            }
+    
         } catch (error) {
             setError(true);
             console.error("Error fetching heart rate data:", error);
@@ -74,7 +87,6 @@ const HeartRate = () => {
     };
 
     const handleProfile = () => {
-        // Navigate back to the profile page
         navigate('/profile'); 
     };
 
@@ -116,6 +128,43 @@ const HeartRate = () => {
                     </strong>
                 </p>
             </div>
+
+            {sessions.length > 1 && (
+                <div className="session-selector">
+                    <label>Select Session: </label>
+                    <select
+                        value={currentSessionIndex}
+                        onChange={(e) => {
+                            const index = parseInt(e.target.value);
+                            setCurrentSessionIndex(index);
+
+                            const selected = sessions[index];
+                            const formatted = selected.map(entry => ({
+                                time: new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                                bpm: entry.data_value
+                            }));
+                            setHeartRateData(formatted);
+
+                            const totalBpm = formatted.reduce((sum, e) => sum + e.bpm, 0);
+                            const avg = formatted.length ? (totalBpm / formatted.length).toFixed(1) : 0;
+                            setAverageHeartRate(avg);
+                        }}
+                    >
+                        {sessions.map((session, idx) => {
+                            const start = new Date(session[0]?.timestamp);
+                            const end = new Date(session[session.length - 1]?.timestamp);
+                            const startTime = start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            const endTime = end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                            return (
+                                <option key={idx} value={idx}>
+                                    Session {idx + 1}: {startTime} – {endTime}
+                                </option>
+                            );
+                        })}
+                    </select>
+                </div>
+            )}
 
             <div className="chart-container">
                 <LineChart
