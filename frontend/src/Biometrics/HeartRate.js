@@ -17,8 +17,8 @@ const HeartRate = () => {
     });
 
     const [availableDates, setAvailableDates] = useState([]);
-    const [sessions, setSessions] = useState([]);
-    const [currentSessionIndex, setCurrentSessionIndex] = useState(0);
+    // const [sessions, setSessions] = useState([]);
+    // const [currentSessionIndex, setCurrentSessionIndex] = useState(0);
 
     const fetchHeartRate = async () => {
         try {
@@ -27,26 +27,16 @@ const HeartRate = () => {
             if (!response.ok) throw new Error("Failed to fetch");
             const result = await response.json();
     
-            // Store all sessions
-            setSessions(result.sessions);
+            const formatted = result.data.map(entry => ({
+                time: new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                bpm: entry.data_value
+            }));
     
-            // Default: show first session
-            if (result.sessions.length > 0) {
-                setCurrentSessionIndex(0);
-                const selected = result.sessions[0];
-                const formatted = selected.map(entry => ({
-                    time: new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    bpm: entry.data_value
-                }));
-                setHeartRateData(formatted);
+            setHeartRateData(formatted);
     
-                const totalBpm = formatted.reduce((sum, e) => sum + e.bpm, 0);
-                const avg = formatted.length ? (totalBpm / formatted.length).toFixed(1) : 0;
-                setAverageHeartRate(avg);
-            } else {
-                setHeartRateData([]);
-                setAverageHeartRate(0);
-            }
+            const totalBpm = formatted.reduce((sum, e) => sum + e.bpm, 0);
+            const avg = formatted.length ? (totalBpm / formatted.length).toFixed(1) : 0;
+            setAverageHeartRate(avg);
     
         } catch (error) {
             setError(true);
@@ -55,6 +45,7 @@ const HeartRate = () => {
             setLoading(false);
         }
     };
+
     
     useEffect(() => {
         fetchHeartRate();
@@ -124,13 +115,13 @@ const HeartRate = () => {
                     </select>
 
                     <p className="date-range-text">
-                        Showing data from <strong>{selectedDate} 8:00 PM</strong> to <strong>
+                        Showing data from <strong>{selectedDate} 6:00 PM</strong> to <strong>
                         {new Date(new Date(selectedDate).getTime() + 16 * 60 * 60 * 1000).toISOString().split('T')[0]} 12:00 PM
                         </strong>
                     </p>
                 </div>
             )}
-
+{/* 
             {sessions.length > 1 && sessions.every(s => s.length > 0) && (
                 <div className="session-selector">
                     <label>Select Session: </label>
@@ -166,7 +157,7 @@ const HeartRate = () => {
                         })}
                     </select>
                 </div>
-            )}
+            )} */}
 
             {loading ? (    
               <div>Loading heart rate data...</div>
