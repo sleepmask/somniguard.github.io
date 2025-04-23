@@ -172,7 +172,9 @@ const HeartRate = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="time" />
                         <YAxis />
-                        <Tooltip />
+                        <Tooltip 
+                            formatter={(value) => [`${parseFloat(value).toFixed(2)} BPM`, 'Heart Rate']}
+                        />
                         <Legend />
                         <Line type="monotone" dataKey="bpm" stroke="#8884d8" />
                     </LineChart>
