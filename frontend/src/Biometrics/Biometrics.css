@@ -107,6 +107,18 @@
     flex-direction: column;
 }
 
+.subheading {
+    font-size: 1rem; /* Smaller text */
+    font-weight: normal;
+    color: white; /* White text */
+    line-height: 1.4;
+    text-align: center;
+    margin-top: 10px;
+    word-wrap: break-word; /* Ensures text wraps properly */
+    overflow-wrap: break-word; /* Another property for word breaking */
+}
+
+
 .session-selector {
     margin-top: 1rem;
     display: flex;
@@ -115,3 +127,16 @@
     justify-content: center;
 }
 
+.custom-tooltip {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background with transparency */
+    color: white; /* White text */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Light border */
+    font-size: 14px;
+    text-align: left;
+}
+.custom-tooltip p {
+    margin: 0;
+    font-size: 12px; /* Adjust font size if needed */
+}
