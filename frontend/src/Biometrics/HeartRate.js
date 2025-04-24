@@ -176,7 +176,13 @@ const HeartRate = () => {
                             formatter={(value) => [`${parseFloat(value).toFixed(2)} BPM`, 'Heart Rate']}
                         />
                         <Legend />
-                        <Line type="monotone" dataKey="bpm" stroke="#8884d8" />
+                        <Line
+                            type="monotone"
+                            dataKey="bpm"
+                            stroke="#8884d8"
+                            dot={false}         
+                            strokeWidth={2}     
+                        />
                     </LineChart>
                     {heartRateData && heartRateData.length === 0 && (
                         <p>No heart rate data found for the selected sleep night.</p>
