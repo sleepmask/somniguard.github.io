@@ -1,10 +1,10 @@
 import axios from 'axios';
 
+<<<<<<< Updated upstream
 export const serverURL = 'https://sleep-ec2.guojasonliu.com:8001/';
 
-// Create an axios instance with your Django backend URL
 const API = axios.create({
-    baseURL: serverURL,  // Django backend base URL
+    baseURL: 'http://127.0.0.1:8000/',  // Django backend base URL
 });
 
 // Login function to get the JWT token
