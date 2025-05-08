@@ -23,8 +23,17 @@ const MovementData = () => {
             const response = await fetch(`${serverURL}api/movement/?date=${selectedDate}`);
             if (!response.ok) throw new Error("Failed to fetch movement data");
             const data = await response.json();
-
-            const formatted = data.map(entry => {
+    
+            console.log('API Response:', data); // Log the response to check its structure
+    
+            // Ensure that the "data" property is an array before proceeding
+            if (!Array.isArray(data.data)) {
+                console.error('Data is not an array:', data); // Log the non-array response
+                throw new Error('Data is not an array');
+            }
+    
+            // Process the movement data (it's inside the "data" property)
+            const formatted = data.data.map(entry => {
                 const magnitude = Math.sqrt(
                     entry.accel_x ** 2 + entry.accel_y ** 2 + entry.accel_z ** 2
                 );
@@ -37,27 +46,29 @@ const MovementData = () => {
                     timestamp: entry.timestamp,
                 };
             });
-
+    
             setMovementData(formatted);
-
+    
             const totalMag = formatted.reduce((sum, e) => sum + e.magnitude, 0);
             const avg = formatted.length ? (totalMag / formatted.length).toFixed(2) : 0;
             setAverageMagnitude(avg);
-
-            // Adjusting the threshold and limiting the number of notable movements
+    
             const notable = formatted
-                .filter(entry => entry.magnitude > 15)  // Adjust threshold here
-                .sort((a, b) => b.magnitude - a.magnitude) // Sort by magnitude descending
-                .slice(0, 4);  // Limit to top 4 notable movements
-
+                .filter(entry => entry.magnitude > 15)
+                .sort((a, b) => b.magnitude - a.magnitude)
+                .slice(0, 4);
+    
             setNotableMovements(notable);
         } catch (err) {
             setError(true);
-            console.error("Error fetching movement data:", err);
+            console.error('Error fetching movement data:', err);
         } finally {
             setLoading(false);
         }
     };
+    
+    
+    
 
     useEffect(() => {
         fetchMovementData();
