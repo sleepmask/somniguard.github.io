@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-<<<<<<< Updated upstream
 export const serverURL = 'https://sleep-ec2.guojasonliu.com:8001/';
 
 const API = axios.create({
