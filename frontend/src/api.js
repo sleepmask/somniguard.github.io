@@ -3,7 +3,7 @@ import axios from 'axios';
 export const serverURL = 'https://sleep-ec2.guojasonliu.com:8001/';
 
 const API = axios.create({
-    baseURL: 'http://127.0.0.1:8000/',  // Django backend base URL
+    baseURL: serverURL,
 });
 
 // Login function to get the JWT token
@@ -43,9 +43,26 @@ export const signup = async (userData) => {
         }
     }
 };
+// export const signup = async (userData) => {
+//     const response = await fetch('/api/signup/', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(userData),
+//     });
 
+//     if (!response.ok) {
+//         const contentType = response.headers.get('content-type');
+//         const errorData = contentType && contentType.includes('application/json')
+//             ? await response.json()
+//             : { error: await response.text() }; // fallback to plain text
 
+//         throw errorData;
+//     }
 
+//     return await response.json();
+// };
 
 // Function to fetch protected data using the access token
 export const fetchProtectedData = async () => {

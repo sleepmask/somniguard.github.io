@@ -80,9 +80,11 @@ const OxygenSaturation = () => {
                 </LineChart>
             </div>
 
+            {oxygenSaturationData && oxygenSaturationData.length > 0 && (
             <p className="timestamp-text">
                 Current SpO2 Level: {oxygenSaturationData[oxygenSaturationData.length - 1]?.saturation}%
             </p>
+            )}
             <p className="timestamp-text">
                 Last Updated: {new Date().toLocaleString()}
             </p>
